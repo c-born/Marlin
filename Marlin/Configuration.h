@@ -380,7 +380,7 @@ const bool Z_PROBE_ENDSTOP_INVERTING = false; // set to true to invert the logic
 // @section extruder
 
 // For direct drive extruder v9 set to true, for geared extruder set to false.
-#define INVERT_E0_DIR false
+#define INVERT_E0_DIR true
 #define INVERT_E1_DIR false
 #define INVERT_E2_DIR false
 #define INVERT_E3_DIR false
@@ -497,7 +497,7 @@ const bool Z_PROBE_ENDSTOP_INVERTING = false; // set to true to invert the logic
   // X and Y offsets must be integers
   #define X_PROBE_OFFSET_FROM_EXTRUDER 33     // Probe on: -left  +right
   #define Y_PROBE_OFFSET_FROM_EXTRUDER 0     // Probe on: -front +behind
-  #define Z_PROBE_OFFSET_FROM_EXTRUDER -5.3  // -below (always!)
+  #define Z_PROBE_OFFSET_FROM_EXTRUDER -0.8	// DAV - Was-5.3  // -below (always!)
 
   #define Z_RAISE_BEFORE_HOMING 4       // (in mm) Raise Z before homing (G28) for Probe Clearance.
                                         // Be sure you have this distance over your Z_MAX_POS in case
