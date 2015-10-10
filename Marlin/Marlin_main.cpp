@@ -663,7 +663,7 @@ void setup() {
       SERIAL_ECHOPGM(MSG_AUTHOR);
       SERIAL_ECHOLNPGM(STRING_CONFIG_H_AUTHOR);
       SERIAL_ECHOPGM("Compiled: ");
-      SERIAL_ECHOLNPGM(__DATE__);
+      SERIAL_ECHOLNPGM(__DATE__ " " __TIME__);
     #endif // STRING_CONFIG_H_AUTHOR
   #endif // STRING_DISTRIBUTION_DATE
 
@@ -7069,7 +7069,8 @@ void manage_inactivity(bool ignore_stepper_queue/*=false*/) {
     handle_status_leds();
   #endif
 
-  check_axes_activity();
+	//TODO DAV 27JUL15 Don't call check_axes_activity() until they sort out the immediate stepper disable problem!!
+  //check_axes_activity();
 }
 
 void kill(const char *lcd_msg) {

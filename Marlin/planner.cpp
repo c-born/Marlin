@@ -514,6 +514,21 @@ float junction_deviation = 0.1;
 
   #if ENABLED(PREVENT_DANGEROUS_EXTRUDE)
     if (de) {
+
+#if 1	// DAV -  Over-pressure detection?
+#define OVERPRESS_PIN 2	//Using X_MAX Endstop for now - DAV
+	  //if(OverPress())
+	pinMode(OVERPRESS_PIN,INPUT);
+    if(digitalRead(OVERPRESS_PIN) == HIGH)
+    {
+		if(target[E_AXIS] > position[E_AXIS]) { // Only limit extrude, not retract!
+		  position[E_AXIS]=target[E_AXIS]; //behave as if the move really took place, but ignore E part
+		  SERIAL_ECHO_START;
+		  SERIAL_ECHOLNPGM(" Extruder Overpressure(HIGH)");
+		}
+    }
+#endif
+
       if (degHotend(extruder) < extrude_min_temp) {
         position[E_AXIS] = target[E_AXIS]; // Behave as if the move really took place, but ignore E part
         de = 0; // no difference
@@ -588,6 +603,7 @@ float junction_deviation = 0.1;
   #else
     if (dx < 0) db |= BIT(X_AXIS);
     if (dy < 0) db |= BIT(Y_AXIS);
+    if (dz < 0) db |= BIT(Z_AXIS);
     if (dz < 0) db |= BIT(Z_AXIS);
   #endif
   if (de < 0) db |= BIT(E_AXIS);
