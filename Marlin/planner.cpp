@@ -604,7 +604,6 @@ float junction_deviation = 0.1;
     if (dx < 0) db |= BIT(X_AXIS);
     if (dy < 0) db |= BIT(Y_AXIS);
     if (dz < 0) db |= BIT(Z_AXIS);
-    if (dz < 0) db |= BIT(Z_AXIS);
   #endif
   if (de < 0) db |= BIT(E_AXIS);
   block->direction_bits = db;

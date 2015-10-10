@@ -1523,7 +1523,7 @@ static void setup_for_endstop_move() {
               if (marlin_debug_flags & DEBUG_LEVELING) {
                 SERIAL_ECHOPAIR("Raise Z (after) by ", (float)Z_RAISE_AFTER_PROBING);
                 SERIAL_EOL;
-                SERIAL_ECHOPAIR("> SERVO_ENDSTOPS > raise_z_after_probing()");
+                SERIAL_ECHOPAIR("> SERVO_ENDSTOPS > raise_z_after_probing()",0); //DAV - Line from repo doesn't compile, what did they mean?...
                 SERIAL_EOL;
               }
             #endif
