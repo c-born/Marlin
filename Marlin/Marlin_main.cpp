@@ -6431,7 +6431,7 @@ void manage_inactivity(bool ignore_stepper_queue/*=false*/) {
   if (stepper_inactive_time && ms > previous_cmd_ms + stepper_inactive_time
       && !ignore_stepper_queue && !blocks_queued()) {
     #if DISABLE_X == true
-      disable_x();
+		disable_x();
     #endif
     #if DISABLE_Y == true
       disable_y();
@@ -6567,7 +6567,8 @@ void manage_inactivity(bool ignore_stepper_queue/*=false*/) {
     handle_status_leds();
   #endif
 
-  check_axes_activity();
+	//TODO DAV 27JUL15 Don't call check_axes_activity() until they sort out the immediate stepper disable problem!!
+  //check_axes_activity();
 }
 
 void kill(const char *lcd_msg) {

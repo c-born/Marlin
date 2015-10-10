@@ -361,13 +361,13 @@ const bool Z_PROBE_ENDSTOP_INVERTING = false; // set to true to invert the logic
 
 // Disables axis when it's not being used.
 // WARNING: When motors turn off there is a chance of losing position accuracy!
-#define DISABLE_X false
-#define DISABLE_Y false
-#define DISABLE_Z false
+#define DISABLE_X true
+#define DISABLE_Y true
+#define DISABLE_Z true
 
 // @section extruder
 
-#define DISABLE_E false // For all extruders
+#define DISABLE_E true // For all extruders
 #define DISABLE_INACTIVE_EXTRUDER true //disable only inactive extruders and keep active extruder enabled
 
 // @section machine
@@ -497,7 +497,7 @@ const bool Z_PROBE_ENDSTOP_INVERTING = false; // set to true to invert the logic
   // X and Y offsets must be integers
   #define X_PROBE_OFFSET_FROM_EXTRUDER 33     // Probe on: -left  +right
   #define Y_PROBE_OFFSET_FROM_EXTRUDER 0     // Probe on: -front +behind
-  #define Z_PROBE_OFFSET_FROM_EXTRUDER -1.0 // DAV Was -0.8	// DAV - Was-5.3  // -below (always!)
+  #define Z_PROBE_OFFSET_FROM_EXTRUDER -1.05 // DAV Was -0.8	// DAV - Was-5.3  // -below (always!)
 
   #define Z_RAISE_BEFORE_HOMING 4       // (in mm) Raise Z before homing (G28) for Probe Clearance.
                                         // Be sure you have this distance over your Z_MAX_POS in case
@@ -575,9 +575,9 @@ const bool Z_PROBE_ENDSTOP_INVERTING = false; // set to true to invert the logic
 
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,4000,500}  // default steps per unit for Ultimaker
 #define DEFAULT_AXIS_STEPS_PER_UNIT   {31.5,31.75,1300,438}  // DAV Settings after 2nd calibration run (Assuming Extruder feed is input size @3mm, not exit @0.34mm
-// DAV - Check acceleration, default x, y were 3000 before
+// DAV - Check acceleration, default x, y were 3000 before, dev set then up to 9000
 #define DEFAULT_MAX_FEEDRATE          {500, 500, 5, 25}    // (mm/sec)
-#define DEFAULT_MAX_ACCELERATION      {9000,9000,100,10000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for Skeinforge 40+, for older versions raise them a lot.
+#define DEFAULT_MAX_ACCELERATION      {3000,3000,100,10000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for Skeinforge 40+, for older versions raise them a lot.
 
 #define DEFAULT_ACCELERATION          3000    // X, Y, Z and E acceleration in mm/s^2 for printing moves
 #define DEFAULT_RETRACT_ACCELERATION  3000    // E acceleration in mm/s^2 for retracts
