@@ -772,7 +772,7 @@ void Planner::_buffer_line(const float &a, const float &b, const float &c, const
     {
 		if(target[E_AXIS] > position[E_AXIS]) { // Only limit extrude, not retract!
 		  position[E_AXIS]=target[E_AXIS]; //behave as if the move really took place, but ignore E part
-		  SERIAL_ECHO_START;
+		  SERIAL_ECHO_START();
 		  SERIAL_ECHOLNPGM(" Extruder Overpressure(HIGH)");
 		}
     }
