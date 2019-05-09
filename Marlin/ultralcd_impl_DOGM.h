@@ -389,106 +389,11 @@ void lcd_kill_screen() {
   #if ENABLED(LIGHTWEIGHT_UI)
     ST7920_Lite_Status_Screen::clear_text_buffer();
   #endif
-<<<<<<< HEAD
-
-  if (PAGE_UNDER(7)) {
-    #if HEATER_IDLE_HANDLER
-      const bool is_idle = (!isBed ? thermalManager.is_heater_idle(heater) :
-      #if HAS_TEMP_BED
-        thermalManager.is_bed_idle()
-      #else
-        false
-      #endif
-      );
-
-      if (blink || !is_idle)
-    #endif
-    _draw_centered_temp((isBed ? thermalManager.degTargetBed() : thermalManager.degTargetHotend(heater)) + 0.5, x, 7); }
-
-  if (PAGE_CONTAINS(21, 28))
-    _draw_centered_temp((isBed ? thermalManager.degBed() : thermalManager.degHotend(heater)) + 0.5, x, 28);
-
-  if (PAGE_CONTAINS(17, 20)) {
-    const uint8_t h = isBed ? 7 : 8,
-                  y = isBed ? 18 : 17;
-    if (isBed ? thermalManager.isHeatingBed() : thermalManager.isHeatingHotend(heater)) {
-      u8g.setColorIndex(0); // white on black
-      u8g.drawBox(x + h, y, 2, 2);
-      u8g.setColorIndex(1); // black on white
-    }
-    else {
-      u8g.drawBox(x + h, y, 2, 2);
-    }
-  }
-}
-
-FORCE_INLINE void _draw_axis_label(const AxisEnum axis, const char* const pstr, const bool blink) {
-  if (blink)
-    lcd_printPGM(pstr);
-  else {
-    if (!axis_homed[axis])
-      u8g.print('?');
-    else {
-      #if DISABLED(DISABLE_REDUCED_ACCURACY_WARNING)
-        if (!axis_known_position[axis])
-          u8g.print(' ');
-        else
-      #endif
-      lcd_printPGM(pstr);
-    }
-  }
-}
-
-inline void lcd_implementation_status_message(const bool blink) {
-  #if ENABLED(STATUS_MESSAGE_SCROLLING)
-    static bool last_blink = false;
-<<<<<<< HEAD
-    lcd_print_utf(lcd_status_message + status_scroll_pos);
-    const uint8_t slen = lcd_strlen(lcd_status_message);
-    if (slen > LCD_WIDTH) {
-      const bool new_blink = lcd_blink();
-      if (last_blink != new_blink) {
-        last_blink = new_blink;
-        // Skip any non-printing bytes
-        while (!PRINTABLE(lcd_status_message[status_scroll_pos])) status_scroll_pos++;
-        if (++status_scroll_pos > slen - LCD_WIDTH) status_scroll_pos = 0;
-=======
-    const uint8_t slen = lcd_strlen(lcd_status_message);
-    const char *stat = lcd_status_message + status_scroll_pos;
-    if (slen <= LCD_WIDTH)
-      lcd_print_utf(stat);                                      // The string isn't scrolling
-    else {
-      if (status_scroll_pos <= slen - LCD_WIDTH)
-        lcd_print_utf(stat);                                    // The string fills the screen
-      else {
-        uint8_t chars = LCD_WIDTH;
-        if (status_scroll_pos < slen) {                         // First string still visible
-          lcd_print_utf(stat);                                  // The string leaves space
-          chars -= slen - status_scroll_pos;                    // Amount of space left
-        }
-        u8g.print('.');                                         // Always at 1+ spaces left, draw a dot
-        if (--chars) {
-          if (status_scroll_pos < slen + 1)                     // Draw a second dot if there's space
-            --chars, u8g.print('.');
-          if (chars) lcd_print_utf(lcd_status_message, chars);  // Print a second copy of the message
-        }
-      }
-      if (last_blink != blink) {
-        last_blink = blink;
-        // Skip any non-printing bytes
-        if (status_scroll_pos < slen) while (!PRINTABLE(lcd_status_message[status_scroll_pos])) status_scroll_pos++;
-        if (++status_scroll_pos >= slen + 2) status_scroll_pos = 0;
->>>>>>> bugfix-1.1.x
-      }
-    }
-  #else
-=======
   const uint8_t h4 = u8g.getHeight() / 4;
   u8g.firstPage();
   do {
     lcd_setFont(FONT_MENU);
     u8g.setPrintPos(0, h4 * 1);
->>>>>>> 1.1.9
     lcd_print_utf(lcd_status_message);
     u8g.setPrintPos(0, h4 * 2);
     lcd_printPGM_utf(PSTR(MSG_HALTED));

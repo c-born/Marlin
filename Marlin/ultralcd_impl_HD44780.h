@@ -337,34 +337,34 @@ static void lcd_set_custom_characters(
   #if ENABLED(LCD_PROGRESS_BAR)
 
     // CHARSET_INFO
-      const static PROGMEM byte progress[3][8] = { {
-        B00000,
-        B10000,
-        B10000,
-        B10000,
-        B10000,
-        B10000,
-        B10000,
-        B00000
-      }, {
-        B00000,
-        B10100,
-        B10100,
-        B10100,
-        B10100,
-        B10100,
-        B10100,
-        B00000
-      }, {
-        B00000,
-        B10101,
-        B10101,
-        B10101,
-        B10101,
-        B10101,
-        B10101,
-        B00000
-      } };
+    const static PROGMEM byte progress[3][8] = { {
+      B00000,
+      B10000,
+      B10000,
+      B10000,
+      B10000,
+      B10000,
+      B10000,
+      B00000
+    }, {
+      B00000,
+      B10100,
+      B10100,
+      B10100,
+      B10100,
+      B10100,
+      B10100,
+      B00000
+    }, {
+      B00000,
+      B10101,
+      B10101,
+      B10101,
+      B10101,
+      B10101,
+      B10101,
+      B00000
+    } };
 
   #endif // LCD_PROGRESS_BAR
 
@@ -401,15 +401,15 @@ static void lcd_set_custom_characters(
         createChar_P(i, corner[i]);
     }
     else
-    #endif
+  #endif
     { // Info Screen uses 5 special characters
-  createChar_P(LCD_BEDTEMP_CHAR, bedTemp);
-  createChar_P(LCD_DEGREE_CHAR, degree);
-  createChar_P(LCD_STR_THERMOMETER[0], thermometer);
-  createChar_P(LCD_FEEDRATE_CHAR, feedrate);
-  createChar_P(LCD_CLOCK_CHAR, clock);
+      createChar_P(LCD_BEDTEMP_CHAR, bedTemp);
+      createChar_P(LCD_DEGREE_CHAR, degree);
+      createChar_P(LCD_STR_THERMOMETER[0], thermometer);
+      createChar_P(LCD_FEEDRATE_CHAR, feedrate);
+      createChar_P(LCD_CLOCK_CHAR, clock);
 
-    #if ENABLED(LCD_PROGRESS_BAR)
+      #if ENABLED(LCD_PROGRESS_BAR)
         if (screen_charset == CHARSET_INFO) { // 3 Progress bar characters for info screen
           for (int16_t i = 3; i--;)
             createChar_P(LCD_STR_PROGRESS[i], progress[i]);
@@ -420,11 +420,11 @@ static void lcd_set_custom_characters(
           createChar_P(LCD_UPLEVEL_CHAR, uplevel);
           #if ENABLED(SDSUPPORT)
             // SD Card sub-menu special characters
-          createChar_P(LCD_STR_REFRESH[0], refresh);
-          createChar_P(LCD_STR_FOLDER[0], folder);
+            createChar_P(LCD_STR_REFRESH[0], refresh);
+            createChar_P(LCD_STR_FOLDER[0], folder);
           #endif
         }
-      }
+    }
 }
 
 static void lcd_implementation_init(
@@ -499,9 +499,9 @@ void lcd_printPGM_utf(const char *str, uint8_t n=LCD_WIDTH) {
       while (slen < len) {
         lcd.write(' ');
         ++slen;
-    }
+      }
       safe_delay(time);
-  }
+    }
     else {
       const char* p = text;
       int dly = time / MAX(slen, 1);
@@ -651,9 +651,9 @@ FORCE_INLINE void _draw_axis_value(const AxisEnum axis, const char *value, const
 
 FORCE_INLINE void _draw_heater_status(const int8_t heater, const char prefix, const bool blink) {
   #if HAS_HEATED_BED
-  const bool isBed = heater < 0;
-  const float t1 = (isBed ? thermalManager.degBed()       : thermalManager.degHotend(heater)),
-              t2 = (isBed ? thermalManager.degTargetBed() : thermalManager.degTargetHotend(heater));
+    const bool isBed = heater < 0;
+    const float t1 = (isBed ? thermalManager.degBed()       : thermalManager.degHotend(heater)),
+                t2 = (isBed ? thermalManager.degTargetBed() : thermalManager.degTargetHotend(heater));
   #else
     const float t1 = thermalManager.degHotend(heater), t2 = thermalManager.degTargetHotend(heater);
   #endif
@@ -665,7 +665,7 @@ FORCE_INLINE void _draw_heater_status(const int8_t heater, const char prefix, co
 
   #if !HEATER_IDLE_HANDLER
     UNUSED(blink);
-      #else
+  #else
     const bool is_idle = (
       #if HAS_HEATED_BED
         isBed ? thermalManager.is_bed_idle() :
@@ -783,7 +783,7 @@ static void lcd_implementation_status_screen() {
         _draw_heater_status(-1, (
           #if HAS_LEVELING
             planner.leveling_active && blink ? '_' :
-      #endif
+          #endif
           LCD_BEDTEMP_CHAR
         ), blink);
       #endif
@@ -960,7 +960,7 @@ static void lcd_implementation_status_screen() {
         lcd_print_utf(stat, LCD_WIDTH);               // The string leaves space
         uint8_t chars = LCD_WIDTH - rlen;             // Amount of space left in characters
 
-        lcd.write('.');                                         // Always at 1+ spaces left, draw a dot
+        lcd.write('.');                               // Always at 1+ spaces left, draw a dot
         if (--chars) {                                // Draw a second dot if there's space
           lcd.write('.');
           if (--chars)
@@ -975,10 +975,10 @@ static void lcd_implementation_status_screen() {
           status_scroll_offset++;
           while (!START_OF_UTF8_CHAR(lcd_status_message[status_scroll_offset]))
             status_scroll_offset++;
-      }
+        }
         else
           status_scroll_offset = 0;
-    }
+      }
     }
   #else
     UNUSED(blink);
@@ -1105,7 +1105,7 @@ static void lcd_implementation_status_screen() {
               filename_scroll_max = MAX(0, utf8_strlen(theCard.longFilename) - n);  // Update the scroll limit
               filename_scroll_pos = 0;                                          // Reset scroll to the start
               lcd_status_update_delay = 8;                                      // Don't scroll right away
-      }
+            }
             outstr += filename_scroll_pos;
           }
         #else
@@ -1159,62 +1159,62 @@ static void lcd_implementation_status_screen() {
 
   #if ENABLED(LCD_HAS_STATUS_INDICATORS)
 
-  static void lcd_implementation_update_indicators() {
-    // Set the LEDS - referred to as backlights by the LiquidTWI2 library
-    static uint8_t ledsprev = 0;
-    uint8_t leds = 0;
+    static void lcd_implementation_update_indicators() {
+      // Set the LEDS - referred to as backlights by the LiquidTWI2 library
+      static uint8_t ledsprev = 0;
+      uint8_t leds = 0;
 
-    if (thermalManager.degTargetBed() > 0) leds |= LED_A;
+      if (thermalManager.degTargetBed() > 0) leds |= LED_A;
 
-    if (thermalManager.degTargetHotend(0) > 0) leds |= LED_B;
+      if (thermalManager.degTargetHotend(0) > 0) leds |= LED_B;
 
-    #if FAN_COUNT > 0
-      if (0
-        #if HAS_FAN0
-          || fanSpeeds[0]
-        #endif
-        #if HAS_FAN1
-          || fanSpeeds[1]
-        #endif
-        #if HAS_FAN2
-          || fanSpeeds[2]
-        #endif
-      ) leds |= LED_C;
-    #endif // FAN_COUNT > 0
+      #if FAN_COUNT > 0
+        if (0
+          #if HAS_FAN0
+            || fanSpeeds[0]
+          #endif
+          #if HAS_FAN1
+            || fanSpeeds[1]
+          #endif
+          #if HAS_FAN2
+            || fanSpeeds[2]
+          #endif
+        ) leds |= LED_C;
+      #endif // FAN_COUNT > 0
 
-    #if HOTENDS > 1
-      if (thermalManager.degTargetHotend(1) > 0) leds |= LED_C;
-    #endif
+      #if HOTENDS > 1
+        if (thermalManager.degTargetHotend(1) > 0) leds |= LED_C;
+      #endif
 
-    if (leds != ledsprev) {
-      lcd.setBacklight(leds);
-      ledsprev = leds;
+      if (leds != ledsprev) {
+        lcd.setBacklight(leds);
+        ledsprev = leds;
+      }
     }
-  }
 
   #endif // LCD_HAS_STATUS_INDICATORS
 
   #if ENABLED(AUTO_BED_LEVELING_UBL)
 
-  /**
-  Possible map screens:
+    /**
+      Possible map screens:
 
-  16x2   |X000.00  Y000.00|
-         |(00,00)  Z00.000|
+      16x2   |X000.00  Y000.00|
+             |(00,00)  Z00.000|
 
-  20x2   | X:000.00  Y:000.00 |
-         | (00,00)   Z:00.000 |
+      20x2   | X:000.00  Y:000.00 |
+             | (00,00)   Z:00.000 |
 
-  16x4   |+-------+(00,00)|
-         ||       |X000.00|
-         ||       |Y000.00|
-         |+-------+Z00.000|
+      16x4   |+-------+(00,00)|
+             ||       |X000.00|
+             ||       |Y000.00|
+             |+-------+Z00.000|
 
-  20x4   | +-------+  (00,00) |
-         | |       |  X:000.00|
-         | |       |  Y:000.00|
-         | +-------+  Z:00.000|
-  */
+      20x4   | +-------+  (00,00) |
+             | |       |  X:000.00|
+             | |       |  Y:000.00|
+             | +-------+  Z:00.000|
+    */
 
     typedef struct {
       uint8_t custom_char_bits[ULTRA_Y_PIXELS_PER_CHAR];
@@ -1239,7 +1239,7 @@ static void lcd_implementation_status_screen() {
         for (uint8_t i = 7; i >= 0; i--)
           SERIAL_PROTOCOLCHAR(TEST(c->custom_char_bits[j], i) ? '1' : '0');
         SERIAL_EOL();
-  }
+      }
       SERIAL_EOL();
     }
     //*/
@@ -1270,38 +1270,38 @@ static void lcd_implementation_status_screen() {
 
     void lcd_implementation_ubl_plot(const uint8_t x, const uint8_t inverted_y) {
 
-    #if LCD_WIDTH >= 20
-      #define _LCD_W_POS 12
-      #define _PLOT_X 1
-      #define _MAP_X 3
-      #define _LABEL(C,X,Y) lcd.setCursor(X, Y); lcd.print(C)
-      #define _XLABEL(X,Y) _LABEL("X:",X,Y)
-      #define _YLABEL(X,Y) _LABEL("Y:",X,Y)
-      #define _ZLABEL(X,Y) _LABEL("Z:",X,Y)
-    #else
-      #define _LCD_W_POS 8
-      #define _PLOT_X 0
-      #define _MAP_X 1
-      #define _LABEL(X,Y,C) lcd.setCursor(X, Y); lcd.write(C)
-      #define _XLABEL(X,Y) _LABEL('X',X,Y)
-      #define _YLABEL(X,Y) _LABEL('Y',X,Y)
-      #define _ZLABEL(X,Y) _LABEL('Z',X,Y)
-    #endif
+      #if LCD_WIDTH >= 20
+        #define _LCD_W_POS 12
+        #define _PLOT_X 1
+        #define _MAP_X 3
+        #define _LABEL(C,X,Y) lcd.setCursor(X, Y); lcd.print(C)
+        #define _XLABEL(X,Y) _LABEL("X:",X,Y)
+        #define _YLABEL(X,Y) _LABEL("Y:",X,Y)
+        #define _ZLABEL(X,Y) _LABEL("Z:",X,Y)
+      #else
+        #define _LCD_W_POS 8
+        #define _PLOT_X 0
+        #define _MAP_X 1
+        #define _LABEL(X,Y,C) lcd.setCursor(X, Y); lcd.write(C)
+        #define _XLABEL(X,Y) _LABEL('X',X,Y)
+        #define _YLABEL(X,Y) _LABEL('Y',X,Y)
+        #define _ZLABEL(X,Y) _LABEL('Z',X,Y)
+      #endif
 
-    #if LCD_HEIGHT <= 3   // 16x2 or 20x2 display
+      #if LCD_HEIGHT <= 3   // 16x2 or 20x2 display
 
-      /**
-       * Show X and Y positions
-       */
-      _XLABEL(_PLOT_X, 0);
+        /**
+         * Show X and Y positions
+         */
+        _XLABEL(_PLOT_X, 0);
         lcd.print(ftostr52(LOGICAL_X_POSITION(pgm_read_float(&ubl._mesh_index_to_xpos[x]))));
 
-      _YLABEL(_LCD_W_POS, 0);
+        _YLABEL(_LCD_W_POS, 0);
         lcd.print(ftostr52(LOGICAL_Y_POSITION(pgm_read_float(&ubl._mesh_index_to_ypos[inverted_y]))));
 
-      lcd.setCursor(_PLOT_X, 0);
+        lcd.setCursor(_PLOT_X, 0);
 
-    #else                 // 16x4 or 20x4 display
+      #else // 16x4 or 20x4 display
 
         coordinate upper_left, lower_right, bottom_right_corner;
         custom_char new_char;
@@ -1360,9 +1360,9 @@ static void lcd_implementation_status_screen() {
           lcd.write(0x03);                           // right edge of the box
         }
 
-      /**
+        /**
          * If the entire 4th row is not in use, do not put vertical bars all the way down to the bottom of the display
-       */
+         */
 
         k = pixels_per_y_mesh_pnt * (GRID_MAX_POINTS_Y) + 2;
         l = (ULTRA_Y_PIXELS_PER_CHAR) * n_rows;
@@ -1371,7 +1371,7 @@ static void lcd_implementation_status_screen() {
           lcd.write(' ');
           lcd.setCursor(n_cols - 1, n_rows - 1);   // right edge of the box
           lcd.write(' ');
-      }
+        }
 
         clear_custom_char(&new_char);
         new_char.custom_char_bits[0] = 0b11111U;              // char #0 is used for the top line of the box
@@ -1501,50 +1501,50 @@ static void lcd_implementation_status_screen() {
           lcd.write(0x07);
         }
 
-    #endif
-
-    /**
-     * Print plot position
-     */
-      lcd.setCursor(_LCD_W_POS, 0);
-    lcd.write('(');
-      lcd.print(x);
-    lcd.write(',');
-      lcd.print(inverted_y);
-    lcd.write(')');
-
-    #if LCD_HEIGHT <= 3   // 16x2 or 20x2 display
+      #endif
 
       /**
-       * Print Z values
+       * Print plot position
        */
-      _ZLABEL(_LCD_W_POS, 1);
+      lcd.setCursor(_LCD_W_POS, 0);
+      lcd.write('(');
+      lcd.print(x);
+      lcd.write(',');
+      lcd.print(inverted_y);
+      lcd.write(')');
+
+      #if LCD_HEIGHT <= 3   // 16x2 or 20x2 display
+
+        /**
+         * Print Z values
+         */
+        _ZLABEL(_LCD_W_POS, 1);
         if (!isnan(ubl.z_values[x][inverted_y]))
           lcd.print(ftostr43sign(ubl.z_values[x][inverted_y]));
-      else
-        lcd_printPGM(PSTR(" -----"));
+        else
+          lcd_printPGM(PSTR(" -----"));
 
-    #else                 // 16x4 or 20x4 display
+      #else                 // 16x4 or 20x4 display
 
-      /**
-       * Show all values at right of screen
-       */
-      _XLABEL(_LCD_W_POS, 1);
+        /**
+         * Show all values at right of screen
+         */
+        _XLABEL(_LCD_W_POS, 1);
         lcd.print(ftostr52(LOGICAL_X_POSITION(pgm_read_float(&ubl._mesh_index_to_xpos[x]))));
-      _YLABEL(_LCD_W_POS, 2);
+        _YLABEL(_LCD_W_POS, 2);
         lcd.print(ftostr52(LOGICAL_Y_POSITION(pgm_read_float(&ubl._mesh_index_to_ypos[inverted_y]))));
 
-      /**
-       * Show the location value
-       */
-      _ZLABEL(_LCD_W_POS, 3);
+        /**
+         * Show the location value
+         */
+        _ZLABEL(_LCD_W_POS, 3);
         if (!isnan(ubl.z_values[x][inverted_y]))
           lcd.print(ftostr43sign(ubl.z_values[x][inverted_y]));
-      else
-        lcd_printPGM(PSTR(" -----"));
+        else
+          lcd_printPGM(PSTR(" -----"));
 
-    #endif // LCD_HEIGHT > 3
-  }
+      #endif // LCD_HEIGHT > 3
+    }
 
     void add_edges_to_custom_char(custom_char * const custom, coordinate * const ul, coordinate * const lr, coordinate * const brc, uint8_t cell_location) {
       uint8_t i, k;
