@@ -1684,6 +1684,7 @@ bool Planner::_populate_block(block_t * const block, bool split_move,
 		}
     }
 #endif
+      #endif // PREVENT_COLD_EXTRUSION
       #if ENABLED(PREVENT_LENGTHY_EXTRUDE)
         if (ABS(de * e_factor[extruder]) > (int32_t)axis_steps_per_mm[E_AXIS_N] * (EXTRUDE_MAXLENGTH)) { // It's not important to get max. extrusion length in a precision < 1mm, so save some cycles and cast to int
           if (COUNT_MOVE) {

@@ -731,7 +731,7 @@
 /**
  * Z Servo Probe, such as an endstop switch on a rotating arm.
  */
-#define Z_ENDSTOP_SERVO_NR 0   // Defaults to SERVO 0 connector.
+#define Z_PROBE_SERVO_NR 0   // Defaults to SERVO 0 connector.
 #define Z_SERVO_ANGLES {40,110}  // Z Servo Deploy and Stow angles
 
 /**
@@ -889,7 +889,7 @@
 // @section machine
 
 // The size of the print bed
-#define X_BED_SIZE 173
+#define X_BED_SIZE 183
 #define Y_BED_SIZE 172
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
@@ -898,7 +898,7 @@
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 200
+#define Z_MAX_POS 115
 
 /**
  * Software Endstops
@@ -1037,7 +1037,7 @@
   #define LEFT_PROBE_BED_POSITION 40
   #define RIGHT_PROBE_BED_POSITION 170
   #define FRONT_PROBE_BED_POSITION 20
-  #define BACK_PROBE_BED_POSITION 170
+  #define BACK_PROBE_BED_POSITION 160
 
   // Probe along the Y axis, advancing X after each column
   //#define PROBE_Y_FIRST
@@ -1940,7 +1940,7 @@
 // Delay (in milliseconds) before the next move will start, to give the servo time to reach its target angle.
 // 300ms is a good value but you can try less delay.
 // If the servo can't reach the requested position, increase it.
-#define SERVO_DELAY 310
+#define SERVO_DELAY {310}
 
 // Only power servos during movement, otherwise leave off to prevent jitter
 #define DEACTIVATE_SERVOS_AFTER_MOVE
