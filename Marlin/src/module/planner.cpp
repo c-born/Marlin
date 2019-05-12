@@ -1681,6 +1681,18 @@ bool Planner::_populate_block(block_t * const block, bool split_move,
           de = 0; // no difference
           SERIAL_ECHO_MSG(MSG_ERR_COLD_EXTRUDE_STOP);
         }
+        #if 1	// DAV -  Over-pressure detection. Input from EMX module reading filament pressure from strain gauge
+          #define OVERPRESS_PIN 2	//Using X_MAX Endstop for now - DAV
+            //if(OverPress())
+          pinMode(OVERPRESS_PIN,INPUT);
+          if(digitalRead(OVERPRESS_PIN) == HIGH) {
+            if(target[E_AXIS] > position[E_AXIS]) { // Only limit extrude, not retract!
+              position[E_AXIS]=target[E_AXIS];      //behave as if the move really took place, but ignore E part
+              de = 0; // no difference
+              SERIAL_ECHO_MSG(" Extruder Overpressure(HIGH)");
+            }
+          }
+        #endif        
       #endif // PREVENT_COLD_EXTRUSION
       #if ENABLED(PREVENT_LENGTHY_EXTRUDE)
         const float e_steps = ABS(de * e_factor[extruder]);
